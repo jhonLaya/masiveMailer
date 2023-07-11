@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}principal{%endblock%}
+{% block body %}
+	<section class="container">
+		<div class="botonera">
+			<a class="btn btn-azul" href="{{url_for('main.add_list')}}">upload a template</a>
+			<a class="btn btn-azul oscuro" href="{{ url_for('mail.new') }}">
+				<!-- <img src="{{ url_for('static', filename='img/message.svg') }}" width="25px" alt="new_message"> -->
+				New Message
+			</a>
+			<a class="btn btn-azul" href="{{url_for('mail.templates')}}">ver templates</a>
+		</div>
+ 
+	</section>
+
+	<section class="container">
+		
+			<div class="email-container">
+				<ul>
+					{% for email in emails %}
+						<li class="tarjeta">
+							<a href="{{ url_for('main.pruebas') }}">
+							    <p><span>asunto: </span> {{email.asunto}}</p>
+								<p class="limite"><span>mensaje:</span> {{email.mensaje}}</p>
+								<p><span>template: </span>{{email.template}}</p>
+							</a>
+							<a href="{{url_for('mail.delete', id=email.id)}}" onclick="confirm('seguro que quieres eliminar?')"><img src="{{url_for('static', filename='img/trash.svg')}}" alt=""></a>
+						</li>
+					{%endfor%}
+				</ul>
+			</div>
+		
+	</section>
+	<script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+	<script src="{{url_for('static', filename='js/ellipsis.js')}}"></script>
+	<script>
+		$('.limite').ellipsis()
+	</script>
+{% endblock %}

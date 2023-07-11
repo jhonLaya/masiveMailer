@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{%block title%}new mail{%endblock%}
+{%block body%}
+	<section class="formulario-container">
+		<form method="post" enctype="multipart/form-data" class="form-section">
+			<div class="input-form">
+				<label for="asunto">asunto</label>
+				<input type="text" name="asunto" id="asunto" required>
+			</div>
+			<div class="input-form">
+				<label for="mensaje">mensaje</label>
+				<textarea name="mensaje" id="mensaje" cols="30" rows="10" required></textarea>
+			</div>
+			<!-- <div class="input-form target" id="fileName">
+				<label class="file-label btn btn_rojo" for="destinatarios-id">archivo con destinatarios</label>
+				<input class="file-container" type="file" name="destinatarios" id="destinatarios-id" required>
+				
+			</div> -->
+			<!-- <input type="file" name="destinatarios" id="destinatarios"> -->
+			<div class="custom-input-file col-md-6 col-sm-6 col-xs-6">
+				<input type="file" id="destinatarios" required name="destinatarios" class="input-file" value="">
+				Subir fichero...
+			</div>
+			<ul class="radio-template">
+				<li><input type="radio" name="template" value="sin_template" id="sin_template" checked><label for="sin_template">sin template</label></li>
+				{% for template in templates %}
+					<li><input type="radio" name="template" id="{{template}}" value="{{template}}"><label for="{{template}}">{{template.replace(".html", "")}}</label> </li>
+				{% endfor %}
+			</ul>
+			<input class="main-btn btn-rojo" type="submit" value="enviar">
+		</form>
+	</section>
+	<script>
+		let input = document.getElementById("destinatarios-id");
+        let fileName = document.getElementById("fileName")
+        let label = document.querySelector('.file-label')
+        // let image = document.querySelector("#fileImage")
+
+        input.addEventListener("change", ()=>{
+            let inputImage = document.querySelector("input[type=file]").files[0];
+            // image.src = "{{url_for('static', filename='img/txt.svg')}}"
+
+            fileName.innerText = inputImage.name;
+            fileName.classList.add('target')
+        })
+        if (label.innerText === 'archivo con destinatarios'){
+        	fileName.classList.remove('target')
+        }
+	</script>
+{%endblock%}

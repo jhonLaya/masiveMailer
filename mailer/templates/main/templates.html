@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Templates{%endblock%}
+{%block body%}
+	<section class="container">
+		<h2 class="header_2">Templates: Vista Previa</h2>
+		<ul class="template-list">
+			{% for template in templates %}
+				<li>
+					<div class="template-card">
+						<a href="../email_templates/{{template}}">{{template}}</a>
+						<a href="{{url_for('mail.delete_plantilla', plantilla = template )}}"><img src="{{url_for('static', filename='img/trash.svg')}}" alt=""></a>
+					</div>
+				</li>
+
+			{%endfor%}
+		</ul>
+	</section>
+{%endblock%}

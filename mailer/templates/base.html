@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{%block title%}{%endblock%} | Mailer</title>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+	<nav class="navegacion">
+		<div>
+			<a href="{{url_for('main.home')}}"><h2>masiveMailer</h2></a>
+		</div>
+	</nav>
+	
+	<section class="container">
+		{% for message in get_flashed_messages() %}
+		<div class="flash">{{message}}</div>
+		{%endfor%}
+	</section>
+	{%block body%}{%endblock%}
+</body>
+</html>
